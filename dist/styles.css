@@ -62,6 +62,29 @@ main {
   background: #f9fafb;
 }
 
+.addr-item {
+  padding: 10px;
+  border-bottom: 1px solid #f3f4f6;
+  cursor: pointer;
+  background: white;
+}
+
+.addr-item:hover {
+  background: #f9fafb;
+}
+
+#address-list {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#address-list:empty {
+  display: none;
+}
+
 input {
   width: 100%;
   padding: 12px;
