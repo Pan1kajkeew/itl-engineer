@@ -38,24 +38,18 @@ function render() {
     renderChecklist();
   }
 
-  if (screen === 'visits') {
-    app.innerHTML = `
-      <h2>История</h2>
-      ${DB.visits.length > 0 
-        ? DB.visits.map((v, i) => `
-            <div class="card">
-              <b>${v.store.address}</b><br>
-              ${new Date(v.startedAt).toLocaleDateString()}
-              <br>
-              Статус: <b>${v.status}</b>
-              <br><br>
-              <button onclick="exportTelegram(${i})">Отправить в Telegram</button>
-            </div>
-          `).join('')
-        : '<div class="card">История пуста</div>'
-      }
-    `;
-  }
+if (screen === 'visits') {
+  app.innerHTML = DB.visits.map((v, i) => `
+    <div class="card">
+      <b>${v.store.address}</b><br>
+      ${new Date(v.startedAt).toLocaleDateString()}
+      <br>
+      Статус: <b>${v.status}</b>
+      <br><br>
+      <button onclick="exportTelegram(${i})">Отправить в Telegram</button>
+    </div>
+  `).join('');
+}
 
   if (screen === 'settings') {
     app.innerHTML = `
@@ -65,11 +59,13 @@ function render() {
   }
 }
 
-function startChecklist() {
+async function startChecklist() {
   if (!DB.currentVisit || !DB.currentVisit.store) {
     alert('Сначала выберите магазин');
     return;
   }
+  
+  await loadEquipment();
   
   DB.currentVisit.startedAt = new Date().toISOString();
   DB.currentVisit.status = 'draft';

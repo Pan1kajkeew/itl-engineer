@@ -1,39 +1,34 @@
 let EQUIPMENT = [];
 
 async function loadEquipment() {
-  try {
-    const res = await fetch('data/equipment.catalog.json');
-    const json = await res.json();
+  const res = await fetch('data/equipment.catalog.json');
+  const json = await res.json();
 
-    EQUIPMENT = json.categories.map(cat => ({
-      category: cat.name,
-      items: cat.items.map(i => ({
-        id: i.id,
-        name: i.name
-      }))
-    }));
-  } catch (e) {
-    console.error('Error loading equipment:', e);
-  }
+  EQUIPMENT = json.categories.map(cat => ({
+    category: cat.name,
+    items: cat.items.map(i => ({
+      id: i.id,
+      name: i.name
+    }))
+  }));
 }
 
 function renderChecklist() {
   const app = document.getElementById('app');
-  if (!app) return;
 
   app.innerHTML = `
     <h2>Чек-лист оборудования</h2>
 
     ${EQUIPMENT.map(cat => `
       <h3>${cat.category}</h3>
-      <table class="checklist" style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+      <table class="checklist">
         <thead>
-          <tr style="background: #eee;">
-            <th style="border: 1px solid #ddd; padding: 8px;">Оборудование</th>
-            <th style="border: 1px solid #ddd; padding: 8px;">ОК</th>
-            <th style="border: 1px solid #ddd; padding: 8px;">Привезти</th>
-            <th style="border: 1px solid #ddd; padding: 8px;">Дата</th>
-            <th style="border: 1px solid #ddd; padding: 8px;">Комментарий</th>
+          <tr>
+            <th>Оборудование</th>
+            <th>ОК</th>
+            <th>Привезти</th>
+            <th>Дата</th>
+            <th>Комментарий</th>
           </tr>
         </thead>
         <tbody>
@@ -42,7 +37,7 @@ function renderChecklist() {
       </table>
     `).join('')}
 
-    <button onclick="finishVisit()" style="width: 100%; padding: 15px; background: #0b3c5d; color: white; border: none; border-radius: 8px; font-size: 16px;">Завершить выезд</button>
+    <button onclick="finishVisit()">Завершить выезд</button>
   `;
 }
 
@@ -51,15 +46,15 @@ function renderRow(e) {
   const error = validateItem(item);
 
   return `
-    <tr class="${error ? 'row-error' : ''}" style="border: 1px solid #ddd;">
-      <td style="padding: 8px; border: 1px solid #ddd;">${e.name}</td>
-      <td style="padding: 8px; border: 1px solid #ddd; text-align: center;"><input type="checkbox" ${item.ok ? 'checked' : ''}
+    <tr class="${error ? 'row-error' : ''}">
+      <td>${e.name}</td>
+      <td><input type="checkbox" ${item.ok ? 'checked' : ''}
         onchange="toggleOk('${e.id}', this.checked)"></td>
-      <td style="padding: 8px; border: 1px solid #ddd;"><input type="number" min="0" style="width: 50px;" value="${item.qty || ''}"
+      <td><input type="number" min="0" value="${item.qty || ''}"
         onchange="setQty('${e.id}', this.value)"></td>
-      <td style="padding: 8px; border: 1px solid #ddd;"><input type="date" value="${item.date || ''}"
+      <td><input type="date" value="${item.date || ''}"
         onchange="setDate('${e.id}', this.value)"></td>
-      <td style="padding: 8px; border: 1px solid #ddd;"><input type="text" style="width: 100%;" value="${item.comment || ''}"
+      <td><input type="text" value="${item.comment || ''}"
         onchange="setComment('${e.id}', this.value)"></td>
     </tr>
   `;
@@ -76,22 +71,18 @@ function getItem(id) {
 
 function toggleOk(id, val) {
   getItem(id).ok = val;
-  save();
 }
 
 function setQty(id, val) {
   getItem(id).qty = Number(val || 0);
-  save();
 }
 
 function setDate(id, val) {
   getItem(id).date = val;
-  save();
 }
 
 function setComment(id, val) {
   getItem(id).comment = val;
-  save();
 }
 
 function validateItem(item) {
@@ -112,7 +103,7 @@ function finishVisit() {
   DB.currentVisit.status = 'done';
   DB.currentVisit.finishedAt = new Date().toISOString();
 
-  DB.visits.push(JSON.parse(JSON.stringify(DB.currentVisit)));
+  DB.visits.push(DB.currentVisit);
 
   DB.currentVisit = {
     store: null,
@@ -125,5 +116,3 @@ function finishVisit() {
   alert('Выезд завершён');
   go('visits');
 }
-
-loadEquipment();
