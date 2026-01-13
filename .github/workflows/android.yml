@@ -1,56 +1,37 @@
-name: Build Android APK
+name: Build ITL Engineer (Release)
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Забираем код
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # 2. Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      # 3. Установка зависимостей
-      - name: Install dependencies
-        run: npm install
+      - run: npm install
 
-      # 4. Web build (у нас минимальный, но шаг обязателен)
-      - name: Build web
-        run: npm run build
-
-      # 5. Установка Capacitor CLI (на всякий случай)
-      - name: Install Capacitor CLI
-        run: npm install -g @capacitor/cli
-
-      # 6. Добавление Android (если ещё не добавлен)
-      - name: Add Android platform
-        run: npx cap add android || echo "Android already added"
-
-      # 7. Синхронизация Capacitor
-      - name: Sync Capacitor
-        run: npx cap sync android
-
-      # 8. Сборка APK (debug — гарантированно собирается)
-      - name: Build APK (Debug)
-        run: |
-          cd android
-          ./gradlew assembleDebug
-
-      # 9. Загрузка APK / AAB как артефакта
-      - name: Upload APK / AAB
-        uses: actions/upload-artifact@v4
+      - uses: actions/setup-java@v4
         with:
-          name: ITL-Engineer-Build
-          path: |
-            android/app/build/outputs/**/*.apk
-            android/app/build/outputs/**/*.aab
+          distribution: temurin
+          java-version: 17
+
+      - run: npm install @capacitor/cli @capacitor/android
+
+      - run: npx cap sync android
+
+      - run: |
+          cd android
+          ./gradlew assembleRelease
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ITL-Engineer-Release
+          path: android/app/build/outputs/apk/release/app-release.apk
+          
