@@ -1,6 +1,5 @@
-// Navigation Router
-export const router = {
-    navigate: (path) => {
-        console.log(`Navigating to ${path}`);
-    }
-};
+let screen = 'home';
+function go(s) {
+  screen = s;
+  render();
+}
