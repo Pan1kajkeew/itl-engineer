@@ -1,3 +1,34 @@
 {
-  "presets": []
+  "networks": [
+    {
+      "id": "pyaterochka",
+      "name": "Пятёрочка",
+      "planOverrides": {
+        "wifi_ap": 4,
+        "ip_camera_indoor": 12,
+        "audio_speaker": 6,
+        "tsd": 2
+      }
+    },
+    {
+      "id": "perekrestok",
+      "name": "Перекрёсток",
+      "planOverrides": {
+        "wifi_ap": 6,
+        "ip_camera_indoor": 20,
+        "audio_speaker": 10,
+        "tsd": 4
+      }
+    },
+    {
+      "id": "chizhik",
+      "name": "Чижик",
+      "planOverrides": {
+        "wifi_ap": 2,
+        "ip_camera_indoor": 8,
+        "audio_speaker": 4,
+        "tsd": 1
+      }
+    }
+  ]
 }
