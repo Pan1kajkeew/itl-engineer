@@ -22,8 +22,6 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - run: npm install @capacitor/cli @capacitor/android
-
       - run: npx cap sync android
 
       - run: |
