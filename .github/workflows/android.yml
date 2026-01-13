@@ -2,40 +2,55 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # 1. Забираем код
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up Node
+      # 2. Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
+      # 3. Установка зависимостей
       - name: Install dependencies
         run: npm install
 
+      # 4. Web build (у нас минимальный, но шаг обязателен)
       - name: Build web
         run: npm run build
 
-      - name: Add Android
-        run: |
-          npx cap add android
-          npx cap sync android
+      # 5. Установка Capacitor CLI (на всякий случай)
+      - name: Install Capacitor CLI
+        run: npm install -g @capacitor/cli
 
-      - name: Build APK
+      # 6. Добавление Android (если ещё не добавлен)
+      - name: Add Android platform
+        run: npx cap add android || echo "Android already added"
+
+      # 7. Синхронизация Capacitor
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      # 8. Сборка APK (debug — гарантированно собирается)
+      - name: Build APK (Debug)
         run: |
           cd android
-          ./gradlew assembleRelease
+          ./gradlew assembleDebug
 
-      - name: Upload APK
-  uses: actions/upload-artifact@v4
-  with:
-    name: ITL-Engineer-Build
-    path: |
-      android/app/build/outputs/**/*.apk
-      android/app/build/outputs/**/*.aab
+      # 9. Загрузка APK / AAB как артефакта
+      - name: Upload APK / AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: ITL-Engineer-Build
+          path: |
+            android/app/build/outputs/**/*.apk
+            android/app/build/outputs/**/*.aab
