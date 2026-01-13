@@ -138,3 +138,20 @@ label {
 .meta b {
   color: #111827;
 }
+
+.row-error {
+  background: #ffe4e6 !important;
+}
+
+h3 {
+  margin-top: 24px;
+}
+
+table.checklist th {
+  text-align: left;
+  font-size: 12px;
+}
+
+table.checklist td {
+  font-size: 14px;
+}

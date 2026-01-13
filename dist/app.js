@@ -1,5 +1,8 @@
+let screen = 'home';
+
 function render() {
   const app = document.getElementById('app');
+  if (!app) return;
 
   if (screen === 'home') {
     app.innerHTML = `
@@ -31,12 +34,22 @@ function render() {
     `;
   }
 
-  if (screen === 'visits') {
-    app.innerHTML = `
-      <h2>История</h2>
-      ${DB.visits.map(v => `<div class="card">${v.address}</div>`).join('')}
-    `;
+  if (screen === 'checklist') {
+    renderChecklist();
   }
+
+if (screen === 'visits') {
+  app.innerHTML = DB.visits.map((v, i) => `
+    <div class="card">
+      <b>${v.store.address}</b><br>
+      ${new Date(v.startedAt).toLocaleDateString()}
+      <br>
+      Статус: <b>${v.status}</b>
+      <br><br>
+      <button onclick="exportTelegram(${i})">Отправить в Telegram</button>
+    </div>
+  `).join('');
+}
 
   if (screen === 'settings') {
     app.innerHTML = `
@@ -46,4 +59,22 @@ function render() {
   }
 }
 
-render();
+async function startChecklist() {
+  if (!DB.currentVisit || !DB.currentVisit.store) {
+    alert('Сначала выберите магазин');
+    return;
+  }
+  
+  await loadEquipment();
+  
+  DB.currentVisit.startedAt = new Date().toISOString();
+  DB.currentVisit.status = 'draft';
+  DB.currentVisit.checklist = [];
+  
+  go('checklist');
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  render();
+});
