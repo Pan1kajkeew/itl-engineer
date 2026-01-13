@@ -11,7 +11,9 @@ function render() {
   if (screen === 'new') {
     app.innerHTML = `
       <h2>Новый выезд</h2>
-      <input placeholder="Адрес магазина">
+      <div style="position: relative;">
+        <input placeholder="Адрес магазина" oninput="handleAddressInput(this)" autocomplete="off">
+      </div>
       <button onclick="startChecklist()">Далее</button>
     `;
   }

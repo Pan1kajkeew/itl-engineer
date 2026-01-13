@@ -1,3 +1,14 @@
 {
-  "stores": []
+  "stores": [
+    { "id": "p5-001", "brand": "Пятёрочка", "address": "г. Москва, ул. Ленина, д. 10", "logo": "pyaterochka.png" },
+    { "id": "p5-002", "brand": "Пятёрочка", "address": "г. Москва, пр-т Мира, д. 45", "logo": "pyaterochka.png" },
+    { "id": "p5-003", "brand": "Пятёрочка", "address": "г. Санкт-Петербург, ул. Садовая, д. 12", "logo": "pyaterochka.png" },
+    { "id": "pr-001", "brand": "Перекрёсток", "address": "г. Москва, ул. Тверская, д. 7", "logo": "perekrestok.png" },
+    { "id": "pr-002", "brand": "Перекрёсток", "address": "г. Москва, пл. Киевского Вокзала, д. 2", "logo": "perekrestok.png" },
+    { "id": "ch-001", "brand": "Чижик", "address": "г. Москва, ул. Большая Полянка, д. 28", "logo": "chizhik.png" },
+    { "id": "ch-002", "brand": "Чижик", "address": "г. Нижний Новгород, ул. Белинского, д. 61", "logo": "chizhik.png" },
+    { "id": "p5-004", "brand": "Пятёрочка", "address": "г. Казань, ул. Пушкина, д. 5", "logo": "pyaterochka.png" },
+    { "id": "pr-003", "brand": "Перекрёсток", "address": "г. Екатеринбург, ул. 8 Марта, д. 46", "logo": "perekrestok.png" },
+    { "id": "ch-003", "brand": "Чижик", "address": "г. Новосибирск, ул. Ленина, д. 1", "logo": "chizhik.png" }
+  ]
 }
