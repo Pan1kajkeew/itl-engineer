@@ -114,3 +114,26 @@ button {
   border-radius: 8px;
   cursor: pointer;
 }
+
+label {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+  margin-left: 4px;
+}
+
+.meta {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta b {
+  color: #111827;
+}

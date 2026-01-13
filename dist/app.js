@@ -12,13 +12,20 @@ function render() {
     app.innerHTML = `
       <h2>Новый выезд</h2>
 
-      <input id="address" placeholder="Начните ввод адреса"
-        oninput="renderAddressList(searchAddress(this.value))"/>
+      <label>Адрес магазина</label>
+      <input
+        id="address"
+        placeholder="Начните ввод адреса"
+        oninput="renderAddressList(searchAddress(this.value))"
+        autocomplete="off"
+      />
 
       <div id="address-list"></div>
 
-      <div>Зона: <b id="zone">—</b></div>
-      <div>Сеть: <b id="network">—</b></div>
+      <div class="meta">
+        <div>Зона: <b id="zone">—</b></div>
+        <div>Сеть: <b id="network">—</b></div>
+      </div>
 
       <button onclick="startChecklist()">Перейти к чек-листу</button>
     `;
