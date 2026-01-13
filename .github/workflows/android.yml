@@ -33,7 +33,9 @@ jobs:
           ./gradlew assembleRelease
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: ITL-Engineer-APK
-          path: android/app/build/outputs/apk/release/app-release.apk
+  uses: actions/upload-artifact@v4
+  with:
+    name: ITL-Engineer-Build
+    path: |
+      android/app/build/outputs/**/*.apk
+      android/app/build/outputs/**/*.aab
