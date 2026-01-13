@@ -1,4 +1,6 @@
-// Equipment Checklist Logic
-export const checklist = {
-    init: () => console.log('Checklist initialized')
-};
+function startChecklist() {
+  const visit = { address: 'магазин', problems: [] };
+  DB.visits.push(visit);
+  saveDB();
+  alert('Чек-лист начат');
+}
