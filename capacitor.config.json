@@ -1,6 +1,6 @@
 {
   "appId": "ru.itl.engineer",
   "appName": "ITL Engineer",
-  "webDir": "dist",
+  "webDir": ".",
   "bundledWebRuntime": false
 }
