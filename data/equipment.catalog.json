@@ -1,8 +1,90 @@
 {
-  "categories": {
-    "Кассовое": ["Сканер 2D","ФР","Принтер чеков"],
-    "Сетевое": ["Маршрутизатор","Коммутатор","Точка доступа"],
-    "Видео": ["IP-камера","Видеорегистратор"],
-    "Звук": ["Усилитель","Колонки"]
-  }
-}
+  "meta": {
+    "version": "1.0",
+    "description": "Единый справочник оборудования ITL"
+  },
+  "categories": [
+    {
+      "id": "pos",
+      "name": "Кассовое оборудование",
+      "items": [
+        { "id": "scanner_2d", "name": "Сканер 2D" },
+        { "id": "scanner_kso", "name": "Сканер КСО" },
+        { "id": "scanner_scale", "name": "Сканер-весы" },
+        { "id": "fiscal_printer", "name": "Фискальный регистратор" },
+        { "id": "receipt_printer", "name": "Принтер чеков" },
+        { "id": "cash_drawer", "name": "Денежный ящик" },
+        { "id": "pos_keyboard", "name": "Кассовая клавиатура" },
+        { "id": "pos_pc", "name": "ПК кассовый" },
+        { "id": "ups_pos", "name": "ИБП кассы" },
+        { "id": "pinpad", "name": "Терминал эквайринга" }
+      ]
+    },
+    {
+      "id": "network",
+      "name": "Сетевое оборудование",
+      "items": [
+        { "id": "router", "name": "Маршрутизатор" },
+        { "id": "switch", "name": "Коммутатор" },
+        { "id": "wifi_ap", "name": "Точка доступа Wi-Fi" },
+        { "id": "wifi_repeater", "name": "Wi-Fi репитер" },
+        { "id": "patch_panel", "name": "Патч-панель" },
+        { "id": "ethernet_socket", "name": "Сетевая розетка" },
+        { "id": "lte_modem", "name": "4G/LTE модем" }
+      ]
+    },
+    {
+      "id": "video",
+      "name": "Видеонаблюдение",
+      "items": [
+        { "id": "ip_camera_indoor", "name": "IP-камера внутренняя" },
+        { "id": "ip_camera_outdoor", "name": "IP-камера уличная" },
+        { "id": "analog_camera", "name": "Аналоговая камера" },
+        { "id": "nvr", "name": "Видеорегистратор (NVR)" },
+        { "id": "dvr", "name": "Видеорегистратор (DVR)" },
+        { "id": "hdd_video", "name": "Жёсткий диск видеонаблюдения" },
+        { "id": "video_monitor", "name": "Монитор видеонаблюдения" }
+      ]
+    },
+    {
+      "id": "audio",
+      "name": "Звук и оповещение",
+      "items": [
+        { "id": "audio_amplifier", "name": "Усилитель" },
+        { "id": "audio_speaker", "name": "Колонка" },
+        { "id": "audio_controller", "name": "Контроллер оповещения" },
+        { "id": "mic", "name": "Микрофон" }
+      ]
+    },
+    {
+      "id": "tsd",
+      "name": "ТСД и мобильное оборудование",
+      "items": [
+        { "id": "tsd", "name": "ТСД" },
+        { "id": "tsd_battery", "name": "Батарея ТСД" },
+        { "id": "mobile_printer", "name": "Мобильный принтер" },
+        { "id": "mobile_printer_battery", "name": "Батарея мобильного принтера" }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Охранные системы",
+      "items": [
+        { "id": "antitheft_gate", "name": "Антикражные ворота" },
+        { "id": "motion_sensor", "name": "Датчик движения" },
+        { "id": "panic_button", "name": "Тревожная кнопка" },
+        { "id": "access_controller", "name": "Контроллер СКУД" }
+      ]
+    },
+    {
+      "id": "office",
+      "name": "Офисное и серверное",
+      "items": [
+        { "id": "admin_pc", "name": "ПК администратора" },
+        { "id": "server", "name": "Сервер магазина" },
+        { "id": "server_rack", "name": "Серверная стойка" },
+        { "id": "printer_mfp", "name": "МФУ" }
+      ]
+    }
+  ]
+        }
